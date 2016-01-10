@@ -4,7 +4,7 @@ import cPickle
 # import from third library
 import numpy
 import theano
-import theano.tensor as T
+from theano import tensor
 
 def make_shared(data_xy, borrow=True):
     data_x, data_y = data_xy
@@ -16,7 +16,7 @@ def make_shared(data_xy, borrow=True):
                                     data_y,
                                     dtype=theano.config.floatX),
                              borrow=borrow)
-    return shared_x, T.cast(shared_y, 'int32')
+    return shared_x, tensor.cast(shared_y, 'int32')
 
 def load(dataset):
     f = gzip.open(dataset, 'rb')
